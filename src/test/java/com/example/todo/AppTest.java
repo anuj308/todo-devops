@@ -1,38 +1,30 @@
 package com.example.todo;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+public class TaskManagerTest {
+
+    @Test
+    void testAddTask() {
+        TaskManager manager = new TaskManager();
+        manager.addTask("Buy milk");
+        assertEquals(1, manager.size());
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    void testRemoveTask() {
+        TaskManager manager = new TaskManager();
+        manager.addTask("Task 1");
+        manager.addTask("Task 2");
+        manager.removeTask(0);
+        assertEquals(1, manager.size());
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void testEmptyTaskNotAllowed() {
+        TaskManager manager = new TaskManager();
+        assertThrows(IllegalArgumentException.class,
+                () -> manager.addTask(" "));
     }
 }
