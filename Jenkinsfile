@@ -1,25 +1,22 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven'
-    }
     stages {
-        stage('Checkout Code From GitHub') {
+        stage('checkout code from gitHub') {
             steps {
                 git branch: "main", url: "https://github.com/anuj308/todo-devops.git"
             }
         }
-        stage('Build The Project') {
+        stage('build the project') {
             steps {
                 sh 'mvn compile'
             }
         }
-        stage('Run Tests') {
+        stage('run a test stage') {
             steps {
                 sh 'mvn test'
             }
         }
-        stage('Package The Application') {
+        stage('package the application') {
             steps {
                 sh 'mvn clean package'
             }
